@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Portfolio | Fazley</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/dcd76f9759.js" crossorigin="anonymous"></script>
+    
+</head>
+<body>
+    <div id="header">
+    <div class="container">
+        <nav> <img src="images/logo.png" alt="logo">
+        <ul id="sidemenu">
+            <li><a href="#header">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#cv">Download CV</a></li>
+            <li><a href="#contact">Contact</a></li>
+        
+            <i class="fas fa-times " onclick="closemenu()"></i>
+           </ul>  
+         <i class="fas fa-bars" onclick="openmenu()"></i>  
+
+       
+    </nav>
+    <div class="header-text">
+        <p>Website Designer</p>
+        <h1>Hi, I'm <span>Fazley</span> Rabbi <br> From Gurugram (India)</h1>
+    </div>
+    </div>
+</div>
+
+<!-- -------------------------- -->
+
+
+<div id="about">
+    <div class="container">
+        <div class="row">
+        <div class="about-col-1"><img src="images/user.png" alt="user"></div>
+        <div class="about-col-2">
+            <h1 class="sub-title">About Me</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum ipsa itaque adipisci voluptatibus asperiores temporibus dolorem dolorum ratione quas? Iusto debitis expedita illum dolor facilis impedit eum obcaecati delectus officiis!</p>
+            
+            <div class="tab-titles">
+                <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
+                <p class="tab-links" onclick="opentab('experience')">Experience</p>
+                <p class="tab-links" onclick="opentab('education')">Education</p>
+            </div>
+            <div class="tab-contents active-tab" id="skills">
+                <ul>
+                    <li><span>UI/UX Designer</span><br>Designing website</li>
+                    <li><span>Web Designer</span><br>Web development</li>
+                    <li><span>Photoshop</span><br>Template Designing</li>
+                </ul>
+            </div>
+            <div class="tab-contents" id="experience">
+                <ul>
+                    <li><span>Jan 2019 - Current</span><br>Elcamino softwear prvt. Ltd.</li>
+                    <li><span>Dec 2017- Jan 2019</span><br>Web development</li>
+                    <li><span>Photoshop</span><br>Template Designing</li>
+                </ul>
+            </div>
+            <div class="tab-contents" id="education">
+                <ul>
+                    <li><span>2013 - 2017</span><br>B.tech in Computer Secince from JNTU Hyderabad</li>
+                    <li><span>2012 - 2013</span><br>Higher Secondary School (12th)</li>
+                    <li><span>2011 - 2012</span><br>Secondary School (10th)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+     </div>
+    </div>
+<!-- -------------------------- -->
+<div class="cv" id="cv"><a href="images/my-cv.pdf" download class="btn">Download CV</a></div>
+<div class="contact" id="contact">
+    
+    <div class="container">
+        <div class="row">
+            <div class="contact-left">
+                <h1 class="sub-title">Contact Me</p></h1>
+                <p><i class="fa-solid fa-paper-plane"></i> fazley007@gmail.com</p>
+                <p><i class="fa-solid fa-mobile-screen-button"></i> +91 9993121550</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-square-facebook"></i></a>
+                    <a href="#"><i class="fa-brands fa-square-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-square-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="contact-right">
+                <form name="submit-to-google-sheet">
+                    <input type="text" name="Name" placeholder="Enter your name" required>
+                    <input type="email" name="Email" placeholder="Enter your email" required>
+                    <textarea name="Message" rows="6" placeholder="Enter your message" required></textarea>
+                    <button type="submit" class="btn">Submit</button>
+                </form>
+                <span id="msg"></span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ---------------------- -->
+<div class="copyright">Thanks for Visiting <i class="fas fa-heart"></i></div>
+<!--JS--------------------------------- -->
+    <script>
+
+        var tablinks = document.getElementsByClassName("tab-links");
+        var tabcontents = document.getElementsByClassName("tab-contents");
+
+        function opentab(tabname){
+            for(tablink of tablinks){
+                tablink.classList.remove("active-link");
+
+            }
+            for(tabcontent of tabcontents){
+                tabcontent.classList.remove("active-tab");
+                
+            }
+            event.currentTarget.classList.add("active-link");
+            document.getElementById(tabname).classList.add("active-tab");
+        }
+    </script>
+    <!-- --JS---------------------------------sidemenu -->
+    <script>
+        var sidemenu = document.getElementById("sidemenu");
+        function openmenu(){
+            sidemenu.style.right = "0";
+
+        }
+        function closemenu(){
+            sidemenu.style.right = "-200px";
+            
+        }
+    </script>
+    <!-- google form----------------- -->
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwmSt58wEEHGkna35yqoefE1zIfKVqfiGBR-mrW2oeF1RQpNCFxUFn46ap5Q0g4ppqolQ/exec'
+        const form = document.forms['submit-to-google-sheet']
+        const msg =document.getElementById("msg")
+      
+        form.addEventListener('submit', e => {
+          e.preventDefault()
+          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => {
+                msg.innerHTML = "Message Sent Successfully"
+                setTimeout(function(){
+                    msg.innerHTML =""
+                },3000)
+                form.reset()
+            })
+            .catch(error => console.error('Error!', error.message))
+        })
+      </script>
+</body>
+</html>
